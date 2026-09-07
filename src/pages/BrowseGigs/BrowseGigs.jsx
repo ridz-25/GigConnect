@@ -1,6 +1,10 @@
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
-import { Link } from "react-router-dom";
+import GigCard from "../../components/GigCard";
+import gigs from "../../data/gigs";
 function BrowseGigs() {
+  const [searchTerm, setSearchTerm]= useState("");
+  const [selectedCategory,setSelectedCategory]= useState("");
   return (
     <>
     <Navbar/>
@@ -20,64 +24,38 @@ function BrowseGigs() {
           <input
             type="text"
             placeholder="Search for a service..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          <select>
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
             <option value="">All Categories</option>
-            <option value="web">Web Development</option>
-            <option value="design">Graphic Design</option>
-            <option value="writing">Content Writing</option>
-            <option value="video">Video Editing</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Content Writing">Content Writing</option>
+            <option value="Video Editing">Video Editing</option>
           </select>
         </div>
 
         <div className="gig-grid">
-
-          <article className="gig-card">
-            <h2>Responsive React Website</h2>
-            <p>
-              I will build a modern responsive website using React.
-            </p>
-
-            <p className="gig-seller">
-              By: Student Developer
-            </p>
-
-            <strong>₹1,500</strong>
-
-            <button>View Gig</button>
-          </article>
-
-          <article className="gig-card">
-            <h2>Professional Logo Design</h2>
-            <p>
-              I will create a clean and modern logo for your brand.
-            </p>
-
-            <p className="gig-seller">
-              By: Student Designer
-            </p>
-
-            <strong>₹500</strong>
-
-            <button>View Gig</button>
-          </article>
-
-          <article className="gig-card">
-            <h2>Content Writing</h2>
-            <p>
-              I will write engaging blogs and website content.
-            </p>
-
-            <p className="gig-seller">
-              By: Student Writer
-            </p>
-
-            <strong>₹700</strong>
-
-            <button>View Gig</button>
-          </article>
-
+          {gigs
+            .filter((gig) =>
+            gig.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (selectedCategory === "" || gig.category === selectedCategory)
+            )
+            .map((gig) => (
+            <GigCard
+              key={gig.id}
+              title={gig.title}
+              description={gig.description}
+              category={gig.category}
+              price={gig.price}
+              seller={gig.seller}
+            />
+          ))}
         </div>
 
       </section>

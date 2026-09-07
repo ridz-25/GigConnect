@@ -43,19 +43,28 @@ function BrowseGigs() {
         <div className="gig-grid">
           {gigs
             .filter((gig) =>
-            gig.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            (selectedCategory === "" || gig.category === selectedCategory)
+              gig.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+              (selectedCategory === "" || gig.category === selectedCategory)
             )
             .map((gig) => (
-            <GigCard
-              key={gig.id}
-              title={gig.title}
-              description={gig.description}
-              category={gig.category}
-              price={gig.price}
-              seller={gig.seller}
-            />
+              <GigCard
+                key={gig.id}
+                title={gig.title}
+                description={gig.description}
+                category={gig.category}
+                price={gig.price}
+                seller={gig.seller}
+              />
           ))}
+
+          {gigs.filter((gig) =>
+          gig.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          (selectedCategory === "" || gig.category === selectedCategory)
+          ).length === 0 && (
+          <p className="no-results">
+          No gigs found. Try a different search or category.
+          </p>
+          )}
         </div>
 
       </section>

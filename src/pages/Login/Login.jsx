@@ -9,7 +9,7 @@ function Login() {
         <h1>Welcome Back</h1>
 
         <p className="auth-subtitle">
-          Login to continue to GigConnet
+          Login to continue to GigConnect
         </p>
 
         <form>

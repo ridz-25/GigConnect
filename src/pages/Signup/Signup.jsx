@@ -10,7 +10,7 @@ function Signup() {
         <h1>Create Your Account</h1>
 
         <p className="auth-subtitle">
-          Join GigConnet and turn your skills into opportunities
+          Join GigConnect and turn your skills into opportunities
         </p>
 
         <form>
